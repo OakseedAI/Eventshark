@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Shark - Premium Speakerships & Sponsorships Discovery</title>
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Discover event speakerships, keynotes, abstracts, and sponsorship opportunities. Plan budgets and analyze participation benefits with AI.">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- CSS Styling -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- App Container -->
+  <div class="app-container">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="logo-icon">
+          <img src="shark_logo.jpg" alt="Event Shark" class="brand-logo-img">
+        </div>
+        <span class="brand-name">Event <span class="accent-text">Shark</span></span>
+      </div>
+      
+      <nav class="sidebar-menu">
+        <button class="nav-item active" data-tab="discover" id="nav-discover">
+          <i class="fa-solid fa-compass"></i> Discover Events
+        </button>
+        <button class="nav-item" data-tab="sponsorships" id="nav-sponsorships">
+          <i class="fa-solid fa-chart-pie"></i> Sponsorship Matcher
+        </button>
+        <button class="nav-item" data-tab="ai-planner" id="nav-ai-planner">
+          <i class="fa-solid fa-brain"></i> AI Benefits Explainer
+        </button>
+        <button class="nav-item" data-tab="settings" id="nav-settings">
+          <i class="fa-solid fa-sliders"></i> Scraper Settings
+        </button>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <div class="current-date-badge">
+          <span class="label">System Date</span>
+          <span class="value" id="current-system-date">July 10, 2026</span>
+        </div>
+        <div class="app-version">v1.2.0 • Premium</div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      
+      <!-- Top Navigation Header -->
+      <header class="main-header">
+        <h1 class="page-title" id="page-title-text">Event Discovery Dashboard</h1>
+        <div class="header-actions">
+          <div class="quick-stat">
+            <span class="stat-number" id="stats-total-events">6</span>
+            <span class="stat-label">Events Loaded</span>
+          </div>
+          <div class="quick-stat">
+            <span class="stat-number" id="stats-total-opps">18</span>
+            <span class="stat-label">Speakerships</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- View Wrapper -->
+      <div class="view-viewport">
+        
+        <!-- ================= DISCOVER TAB ================= -->
+        <section class="tab-view active" id="view-discover">
+          
+          <!-- Search, Filter & Live Scraping Card -->
+          <div class="glass-card control-panel-card">
+            <div class="search-filter-grid">
+              
+              <!-- Left side filters -->
+              <div class="filters-column">
+                <div class="search-box">
+                  <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                  <input type="text" id="search-input" placeholder="Search event names, locations, descriptions...">
+                </div>
+                
+                <div class="slider-container">
+                  <div class="slider-header">
+                    <span class="slider-label">Date Horizon: <span class="slider-value" id="slider-date-label">12 Months</span></span>
+                    <span class="slider-range-desc">Aug 2026 - Jul 2027</span>
+                  </div>
+                  <input type="range" id="date-slider" min="1" max="12" value="12" step="1" class="custom-slider">
+                </div>
+                
+                <div class="checkbox-filters">
+                  <span class="filter-group-title">Speakership Types:</span>
+                  <div class="checkbox-grid">
+                    <label class="custom-checkbox">
+                      <input type="checkbox" id="filter-keynotes" checked>
+                      <span class="checkmark"></span> Keynotes
+                    </label>
+                    <label class="custom-checkbox">
+                      <input type="checkbox" id="filter-abstracts" checked>
+                      <span class="checkmark"></span> Abstracts
+                    </label>
+                    <label class="custom-checkbox">
+                      <input type="checkbox" id="filter-papers" checked>
+                      <span class="checkmark"></span> Papers
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right side real scraper trigger -->
+              <div class="live-scraper-column">
+                <h3 class="column-title"><i class="fa-solid fa-spider"></i> Live URL Web Scraper</h3>
+                <p class="column-desc">Found an event not in the list? Enter its website below to scan for organizer contacts and opportunity pages.</p>
+                <div class="scraper-input-group">
+                  <input type="url" id="scrape-url-input" placeholder="https://exampleconference.com" required>
+                  <button id="btn-run-scraper" class="btn-primary"><i class="fa-solid fa-bolt"></i> Scrape Site</button>
+                </div>
+                <div class="scraper-quick-tips">
+                  <span><i class="fa-solid fa-circle-info"></i> Bypasses browser CORS via Secure API Proxy.</span>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+
+          <!-- Events Listing Grid -->
+          <div class="section-header">
+            <h2 class="section-title">Available Opportunities</h2>
+            <span class="results-count" id="results-count-text">Showing 6 matches</span>
+          </div>
+
+          <div class="events-grid" id="events-grid-container">
+            <!-- Dynamically populated event cards go here -->
+          </div>
+          
+        </section>
+
+        <!-- ================= SPONSORSHIPS TAB ================= -->
+        <section class="tab-view" id="view-sponsorships">
+          <div class="sponsorship-layout">
+            
+            <!-- Left Side Budget Input & Selector -->
+            <div class="sponsorship-controls glass-card">
+              <h3>Sponsorship Calculator</h3>
+              <p class="subtitle">Set your budget to find and match the best sponsorship packages for your business goals.</p>
+              
+              <div class="form-group budget-form-group">
+                <label for="input-budget">Enter Your Financial Budget ($ USD)</label>
+                <div class="budget-input-wrapper">
+                  <span class="currency-symbol">$</span>
+                  <input type="number" id="input-budget" value="15000" min="500" step="500">
+                </div>
+                <div class="budget-shortcuts">
+                  <button class="budget-shortcut-btn" data-value="5000">$5k</button>
+                  <button class="budget-shortcut-btn" data-value="15000">$15k</button>
+                  <button class="budget-shortcut-btn" data-value="30000">$30k</button>
+                  <button class="budget-shortcut-btn" data-value="50000">$50k</button>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="select-sponsor-event">Select Target Event</label>
+                <select id="select-sponsor-event" class="custom-select">
+                  <!-- Dynamically populated from seedEvents -->
+                </select>
+              </div>
+
+              <div class="roi-recommendation-box" id="roi-box">
+                <div class="roi-header">
+                  <i class="fa-solid fa-circle-check roi-icon"></i>
+                  <h4>Optimal Package Match</h4>
+                </div>
+                <p id="roi-recommendation-text">Select an event and adjust your budget to calculate your optimal sponsorship package.</p>
+              </div>
+            </div>
+
+            <!-- Right Side Packages Showcase -->
+            <div class="sponsorship-showcase">
+              <div class="showcase-header">
+                <h3>Package Breakdown & Inclusions</h3>
+                <span class="badge badge-accent" id="event-selected-badge">Global Tech Summit</span>
+              </div>
+              
+              <div class="packages-grid" id="packages-comparison-container">
+                <!-- Dynamically populated packages comparison cards go here -->
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ================= AI PLANNER TAB ================= -->
+        <section class="tab-view" id="view-ai-planner">
+          <div class="ai-planner-layout">
+            
+            <!-- Config Column -->
+            <div class="ai-config-panel glass-card">
+              <h3>AI Business Case Planner</h3>
+              <p class="subtitle">Select your business vertical and target event to generate a tailored business benefit pitch, target metrics, and ROI analysis.</p>
+              
+              <div class="form-group">
+                <label>1. Select Your Business Type</label>
+                <div class="verticals-radio-group" id="verticals-options-container">
+                  <!-- Dynamically populated from businessVerticals -->
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="select-ai-event">2. Target Event</label>
+                <select id="select-ai-event" class="custom-select">
+                  <!-- Dynamically populated from seedEvents -->
+                </select>
+              </div>
+              
+              <button id="btn-generate-ai" class="btn-primary btn-block"><i class="fa-solid fa-wand-magic-sparkles"></i> Generate AI Analysis</button>
+            </div>
+            
+            <!-- Output Column -->
+            <div class="ai-output-panel glass-card">
+              <div class="ai-output-header">
+                <div class="ai-title-wrap">
+                  <div class="pulse-ring"></div>
+                  <h3>Event Shark AI Analysis</h3>
+                </div>
+                <div class="ai-model-tag" id="ai-model-tag-text">Local Smart Heuristic Model</div>
+              </div>
+              
+              <div class="ai-output-content" id="ai-output-box">
+                <div class="ai-placeholder">
+                  <i class="fa-solid fa-brain-circuit ai-icon"></i>
+                  <p>Click "Generate AI Analysis" on the left to analyze business benefits, reach metrics, and partnership opportunities for this event.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ================= SETTINGS TAB ================= -->
+        <section class="tab-view" id="view-settings">
+          <div class="settings-layout glass-card">
+            <h3>Scraper & Model Settings</h3>
+            <p class="subtitle">Customize scraper endpoints, proxy setups, and configure real Gemini API keys to unlock advanced AI generation.</p>
+            
+            <div class="settings-section">
+              <h4>Gemini API Settings</h4>
+              <p class="desc">By default, the AI Benefits generator uses high-quality structured rules. Provide a Gemini API Key to enable real-time generative responses directly from Google’s models.</p>
+              
+              <div class="form-group">
+                <label for="settings-api-key">Gemini API Key</label>
+                <div class="api-key-input-wrapper">
+                  <input type="password" id="settings-api-key" placeholder="Enter AIzaSy... API Key">
+                  <button id="btn-toggle-key-visibility" class="btn-icon"><i class="fa-solid fa-eye"></i></button>
+                </div>
+                <span class="input-helper">Your API key is saved locally in your browser storage and is sent only to Google API endpoints.</span>
+              </div>
+              
+              <div class="form-group">
+                <label for="settings-gemini-model">Gemini Model Choice</label>
+                <select id="settings-gemini-model" class="custom-select">
+                  <option value="gemini-1.5-flash" selected>Gemini 1.5 Flash (Recommended - Fast & Light)</option>
+                  <option value="gemini-1.5-pro">Gemini 1.5 Pro (Rich Business Strategy)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="settings-section border-top">
+              <h4>CORS Scraper Settings</h4>
+              <p class="desc">Customize the public CORS proxy used to download HTML of external websites.</p>
+              
+              <div class="form-group">
+                <label for="settings-proxy-url">Proxy Server URL</label>
+                <input type="text" id="settings-proxy-url" value="https://api.allorigins.win/raw?url=" class="custom-input">
+              </div>
+              
+              <button id="btn-save-settings" class="btn-primary"><i class="fa-solid fa-save"></i> Save Configuration</button>
+              <button id="btn-reset-settings" class="btn-secondary">Reset to Defaults</button>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Terminal Scraper Overlay Modal -->
+  <div class="terminal-overlay" id="scraper-terminal-modal">
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="terminal-buttons">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+        <span class="terminal-title">Event Shark Scraper Core Console</span>
+        <button class="terminal-close-btn" id="btn-close-terminal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      
+      <div class="terminal-body" id="terminal-log-content">
+        <!-- Logs dynamically updated here -->
+      </div>
+      
+      <div class="terminal-footer">
+        <span class="scraper-status-label">STATUS: <span class="status-val running" id="terminal-status-val">SCRAPING...</span></span>
+        <button id="btn-abort-scrape" class="btn-terminal-abort">Abort Task</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scraped Opportunity Details Modal -->
+  <div class="modal-overlay" id="event-detail-modal">
+    <div class="detail-modal">
+      <div class="modal-header">
+        <div class="header-logo-wrap">
+          <div class="modal-logo-badge" id="modal-event-logo">EV</div>
+          <div>
+            <h3 id="modal-event-name">Event Name</h3>
+            <span class="modal-event-meta" id="modal-event-meta-text"><i class="fa-solid fa-calendar"></i> Date | <i class="fa-solid fa-map-location-dot"></i> Location</span>
+          </div>
+        </div>
+        <button class="modal-close-btn" id="btn-close-detail-modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      
+      <div class="modal-body">
+        
+        <div class="modal-grid">
+          <!-- Left Main Body -->
+          <div class="modal-main-column">
+            <h4 class="modal-section-title">Event Summary</h4>
+            <p id="modal-event-desc" class="modal-event-description">Event description goes here...</p>
+            
+            <h4 class="modal-section-title">Open Speakership Tracks</h4>
+            <div class="modal-opportunities-list" id="modal-opps-container">
+              <!-- Speakership slots dynamically populated -->
+            </div>
+          </div>
+          
+          <!-- Right Sidebar -->
+          <div class="modal-sidebar-column">
+            <div class="modal-info-card glass-card">
+              <h5>Quick Contacts</h5>
+              <div class="contacts-list" id="modal-contacts-container">
+                <!-- Contacts lists -->
+              </div>
+              <button class="btn-primary btn-block btn-small btn-run-scraper-modal" id="btn-rescraped-modal"><i class="fa-solid fa-arrows-rotate"></i> Re-Scrape Site Contacts</button>
+            </div>
+            
+            <div class="modal-info-card glass-card">
+              <h5>Official External Links</h5>
+              <div class="links-list" id="modal-links-container">
+                <!-- Links list -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div class="toast-notification" id="app-toast">
+    <i class="fa-solid fa-info-circle toast-icon"></i>
+    <span class="toast-message" id="app-toast-message">Notification message</span>
+  </div>
+
+  <!-- JavaScript App Logic -->
+  <script src="data.js"></script>
+  <script src="scraper.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
