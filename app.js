@@ -177,14 +177,14 @@ function setupFilters() {
 }
 
 function getDaysUntil(dateStr) {
-  const target = new Date(dateStr);
+  const target = new Date(dateStr.replace(/-/g, '/'));
   const diffTime = target - SYSTEM_DATE;
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   return diffDays;
 }
 
 function formatDate(dateStr) {
-  const d = new Date(dateStr);
+  const d = new Date(dateStr.replace(/-/g, '/'));
   const options = { month: 'short', day: 'numeric', year: 'numeric' };
   return d.toLocaleDateString('en-US', options);
 }

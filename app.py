@@ -101,11 +101,35 @@ def get_inlined_html():
     if css:
         html = html.replace('</head>', f'<style>{css}</style>\n</head>')
         
-    # 4. Inject JavaScript payload (ordered: data -> scraper -> app) at the end of <body>
+    # 4. Inject global error console script at the beginning of <body>
+    error_handler = """
+    <script>
+    window.onerror = function(message, source, lineno, colno, error) {
+      var errDiv = document.createElement('div');
+      errDiv.style.position = 'fixed';
+      errDiv.style.top = '0';
+      errDiv.style.left = '0';
+      errDiv.style.width = '100%';
+      errDiv.style.backgroundColor = 'rgba(239, 68, 68, 0.95)';
+      errDiv.style.color = '#fff';
+      errDiv.style.padding = '15px';
+      errDiv.style.zIndex = '99999';
+      errDiv.style.fontFamily = 'monospace';
+      errDiv.style.fontSize = '12px';
+      errDiv.style.boxShadow = '0 4px 15px rgba(0,0,0,0.5)';
+      errDiv.innerHTML = '<strong>Event Shark JS Crash:</strong> ' + message + ' <br><small>at ' + source + ':' + lineno + ':' + colno + '</small>';
+      document.body.insertBefore(errDiv, document.body.firstChild);
+      return false;
+    };
+    </script>
+    """
+    html = html.replace('<body>', f'<body>\n{error_handler}')
+        
+    # 5. Inject JavaScript payload (ordered: data -> scraper -> app) at the end of <body>
     js_payload = f"<script>{data_js}</script>\n<script>{scraper_js}</script>\n<script>{app_js}</script>"
     html = html.replace('</body>', f'{js_payload}\n</body>')
     
-    # 5. Inline the Shark Logo as Base64 image
+    # 6. Inline the Shark Logo as Base64 image
     logo_path = find_file("shark_logo.jpg")
     if logo_path:
         with open(logo_path, "rb") as f:
