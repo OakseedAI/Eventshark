@@ -12,6 +12,13 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
+def replace_tag(html, pattern, replacement):
+    match = re.search(pattern, html)
+    if match:
+        start, end = match.span()
+        return html[:start] + replacement + html[end:]
+    return html
+
 def get_inlined_html():
     base_dir = os.path.dirname(os.path.abspath(__file__))
     
@@ -29,7 +36,7 @@ def get_inlined_html():
         with open(css_path, "r", encoding="utf-8") as f:
             css = f.read()
         # Replace stylesheet link with inline CSS (handles indentation and single/double quotes)
-        html = re.sub(r'<\s*link[^>]*href=["\']styles\.css["\'][^>]*>', f'<style>{css}</style>', html)
+        html = replace_tag(html, r'<\s*link[^>]*href=["\']styles\.css["\'][^>]*>', f'<style>{css}</style>')
         
     # Read data.js
     data_path = os.path.join(base_dir, "data.js")
@@ -37,21 +44,21 @@ def get_inlined_html():
         with open(data_path, "r", encoding="utf-8") as f:
             data_js = f.read()
         # Replace script tag with inline JS
-        html = re.sub(r'<\s*script[^>]*src=["\']data\.js["\'][^>]*><\s*/\s*script\s*>', f'<script>{data_js}</script>', html)
+        html = replace_tag(html, r'<\s*script[^>]*src=["\']data\.js["\'][^>]*><\s*/\s*script\s*>', f'<script>{data_js}</script>')
         
     # Read scraper.js
     scraper_path = os.path.join(base_dir, "scraper.js")
     if os.path.exists(scraper_path):
         with open(scraper_path, "r", encoding="utf-8") as f:
             scraper_js = f.read()
-        html = re.sub(r'<\s*script[^>]*src=["\']scraper\.js["\'][^>]*><\s*/\s*script\s*>', f'<script>{scraper_js}</script>', html)
+        html = replace_tag(html, r'<\s*script[^>]*src=["\']scraper\.js["\'][^>]*><\s*/\s*script\s*>', f'<script>{scraper_js}</script>')
         
     # Read app.js
     app_path = os.path.join(base_dir, "app.js")
     if os.path.exists(app_path):
         with open(app_path, "r", encoding="utf-8") as f:
             app_js = f.read()
-        html = re.sub(r'<\s*script[^>]*src=["\']app\.js["\'][^>]*><\s*/\s*script\s*>', f'<script>{app_js}</script>', html)
+        html = replace_tag(html, r'<\s*script[^>]*src=["\']app\.js["\'][^>]*><\s*/\s*script\s*>', f'<script>{app_js}</script>')
         
     # Inline the Shark Logo as Base64 image
     logo_path = os.path.join(base_dir, "shark_logo.jpg")
