@@ -125,8 +125,24 @@ def get_inlined_html():
     """
     html = html.replace('<body>', f'<body>\n{error_handler}')
         
-    # 5. Inject JavaScript payload (ordered: data -> scraper -> app) at the end of <body>
-    js_payload = f"<script>{data_js}</script>\n<script>{scraper_js}</script>\n<script>{app_js}</script>"
+    # 5. Inject JavaScript payload (ordered: data -> scraper -> app) wrapped in IIFEs to isolate scopes
+    js_payload = f"""
+    <script>
+    (function() {{
+      {data_js}
+    }})();
+    </script>
+    <script>
+    (function() {{
+      {scraper_js}
+    }})();
+    </script>
+    <script>
+    (function() {{
+      {app_js}
+    }})();
+    </script>
+    """
     html = html.replace('</body>', f'{js_payload}\n</body>')
     
     # 6. Inline the Shark Logo as Base64 image
