@@ -159,10 +159,12 @@ function setupFilters() {
   });
   
   // Industry Theme selector input
-  filterVertical.addEventListener('change', (e) => {
-    state.filters.vertical = e.target.value;
-    renderEventsGrid();
-  });
+  if (filterVertical) {
+    filterVertical.addEventListener('change', (e) => {
+      state.filters.vertical = e.target.value;
+      renderEventsGrid();
+    });
+  }
   
   // Date slider input
   dateSlider.addEventListener('input', (e) => {
