@@ -38,7 +38,7 @@ const state = {
 };
 
 // ================= INITIALIZATION =================
-document.addEventListener('DOMContentLoaded', () => {
+function init() {
   setupNavigation();
   setupFilters();
   setupScraper();
@@ -59,7 +59,13 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   
   showToast("Welcome to Event Shark! Database loaded.");
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
 
 // ================= TOAST NOTIFICATION =================
 function showToast(message, duration = 3000) {
