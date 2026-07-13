@@ -1,6 +1,6 @@
 /**
  * Event Shark - Seed Database
- * Contains rich mock data for key industry events spanning Tech, SaaS, Finance, Biotech, E-commerce.
+ * Contains rich mock data for key industry events spanning Tech, SaaS, Finance, Healthcare, Consumer Tech, and Military.
  * Event dates are calculated dynamically relative to the current time: July 10, 2026.
  */
 
@@ -23,24 +23,29 @@ const businessVerticals = [
     description: "Cloud-based enterprise software, customer relationship systems, workflow tools, and productivity applications."
   },
   {
-    id: "fintech",
-    name: "FinTech & Blockchain",
-    description: "Payment processors, digital banking apps, decentralised finance, cybersecurity, and financial management tools."
+    id: "finance",
+    name: "Finance & Fintech",
+    description: "Digital banking, payments, decentralized finance, trading tech, investment algorithms, and transaction security."
   },
   {
-    id: "biotech-health",
-    name: "HealthTech & BioTech",
-    description: "Medical devices, digital health portals, pharmaceutical research tools, healthcare logistics, and telemedicine."
+    id: "healthcare",
+    name: "Healthcare & Mental Health",
+    description: "Clinical systems, medical devices, diagnostics, digital therapeutics, mental health applications, and telehealth."
   },
   {
-    id: "ecommerce",
-    name: "E-Commerce & Retail",
-    description: "Online storefront solutions, logistics, direct-to-consumer goods, payment channels, and marketing tech."
+    id: "consumer-tech",
+    name: "Consumer Tech & Retail",
+    description: "Electronics, mobile devices, online stores, logistics, direct-to-consumer goods, and advertising tech."
+  },
+  {
+    id: "military-industrial",
+    name: "Military & Industrial",
+    description: "Defense tech, security, avionics, industrial IoT, factory automation, robotics, and logistics hardware."
   },
   {
     id: "cleantech",
     name: "CleanTech & Sustainability",
-    description: "Renewable energy software, battery technologies, smart grid integrations, carbon tracking platforms, and sustainable hardware."
+    description: "Renewable energy software, battery technologies, smart grid integrations, and carbon tracking."
   }
 ];
 
@@ -49,7 +54,7 @@ const seedEvents = [
     id: 1,
     name: "Global Tech Summit 2026",
     logoText: "GTS",
-    date: getDateOffset(45), // ~ August 24, 2026 (45 days out - within 30-day to 1-year window)
+    date: getDateOffset(45), // ~ August 24, 2026
     location: "San Francisco, CA",
     website: "https://globaltechsummit.io",
     verticals: ["ai-ml", "saas"],
@@ -79,59 +84,20 @@ const seedEvents = [
       { name: "Marcus Stone", role: "Sponsor Relations", email: "sponsorship@globaltechsummit.io", linkedin: "https://linkedin.com/in/marcusstone-gts" }
     ],
     sponsorships: [
-      {
-        tier: "Platinum",
-        cost: 45000,
-        inclusions: [
-          "15-minute speaking slot on the Main Stage",
-          "Premium 20x20 central island booth in Expo Hall",
-          "Full attendee list with lead contact info (GDPR-compliant)",
-          "10 VIP full-access passes & 20 expo-only passes",
-          "Dedicated email blast sent to all 5,000+ pre-registered attendees",
-          "Prominent logo on main conference badge lanyard"
-        ]
-      },
-      {
-        tier: "Gold",
-        cost: 25000,
-        inclusions: [
-          "Panel speakership slot on standard track",
-          "Standard 10x10 booth space",
-          "Logo displayed on session intro slides & website footer",
-          "5 full-access tickets",
-          "Feature in GTS mobile app sponsor directory"
-        ]
-      },
-      {
-        tier: "Silver",
-        cost: 12000,
-        inclusions: [
-          "Basic 10x10 booth space (rear corridor)",
-          "Logo listed on website & badge backing",
-          "2 full-access tickets",
-          "Includes basic lead scanner device rental"
-        ]
-      },
-      {
-        tier: "Bronze",
-        cost: 5000,
-        inclusions: [
-          "No booth included. Pull-up banner in registration lobby",
-          "Logo printed in official digital handbook",
-          "1 general attendee ticket",
-          "Shared table in the startup showcase zone"
-        ]
-      }
+      { tier: "Platinum", cost: 45000, inclusions: ["15-minute speaking slot on the Main Stage", "Premium 20x20 central island booth in Expo Hall", "Full attendee list with lead contact info", "10 VIP full-access passes & 20 expo-only passes"] },
+      { tier: "Gold", cost: 25000, inclusions: ["Panel speakership slot on standard track", "Standard 10x10 booth space", "Logo displayed on session intro slides & website footer", "5 full-access tickets"] },
+      { tier: "Silver", cost: 12000, inclusions: ["Basic 10x10 booth space (rear corridor)", "Logo listed on website & badge backing", "2 full-access tickets"] },
+      { tier: "Bronze", cost: 5000, inclusions: ["No booth included. Pull-up banner in registration lobby", "Logo printed in official digital handbook", "1 general attendee ticket"] }
     ]
   },
   {
     id: 2,
     name: "FinTech Frontiers Expo",
     logoText: "FFE",
-    date: getDateOffset(90), // ~ October 8, 2026 (~90 days out)
+    date: getDateOffset(90), // ~ October 8, 2026
     location: "New York City, NY",
     website: "https://fintechfrontiers.net",
-    verticals: ["fintech", "saas"],
+    verticals: ["finance", "saas"],
     description: "East coast's largest conference focusing on global micro-payments, decentralized identity, transaction security, and banking SaaS applications.",
     opportunities: {
       keynote: {
@@ -158,45 +124,10 @@ const seedEvents = [
       { name: "Sarah Jenkins", role: "Exhibitor Coordinator", email: "exhibits@fintechfrontiers.net", linkedin: "https://linkedin.com/in/sarahj-ffe" }
     ],
     sponsorships: [
-      {
-        tier: "Platinum",
-        cost: 35000,
-        inclusions: [
-          "Moderator seat on one of the main panels",
-          "10x20 Booth in the main Fintech corridor",
-          "Logo on the mobile app splash screen & physical banners",
-          "8 full-access tickets",
-          "Double-page advertisement in the FinTech Frontiers magazine"
-        ]
-      },
-      {
-        tier: "Gold",
-        cost: 20000,
-        inclusions: [
-          "10x10 standard booth space",
-          "Session sponsor logo placement for a selected breakout room",
-          "4 full-access tickets",
-          "Custom pushes on mobile app during breaks"
-        ]
-      },
-      {
-        tier: "Silver",
-        cost: 10000,
-        inclusions: [
-          "6ft skirted table display in high-traffic foyer",
-          "Logo on website under silver sponsors",
-          "2 full-access tickets"
-        ]
-      },
-      {
-        tier: "Bronze",
-        cost: 3500,
-        inclusions: [
-          "Logo placement on website",
-          "1 full-access ticket",
-          "Brochure drop inside attendee swag bag"
-        ]
-      }
+      { tier: "Platinum", cost: 35000, inclusions: ["Moderator seat on one of the main panels", "10x20 Booth in the main Fintech corridor", "Logo on the mobile app splash screen", "8 full-access tickets"] },
+      { tier: "Gold", cost: 20000, inclusions: ["10x10 standard booth space", "Session sponsor logo placement for a selected breakout room", "4 full-access tickets"] },
+      { tier: "Silver", cost: 10000, inclusions: ["6ft skirted table display in high-traffic foyer", "Logo on website under silver sponsors", "2 full-access tickets"] },
+      { tier: "Bronze", cost: 3500, inclusions: ["Logo placement on website", "1 full-access ticket", "Brochure drop inside attendee swag bag"] }
     ]
   },
   {
@@ -233,56 +164,20 @@ const seedEvents = [
       { name: "Emma Larsson", role: "Speaker Coordinator", email: "speakers@saasconeurope.org", linkedin: "https://linkedin.com/in/emma-larsson-scn" }
     ],
     sponsorships: [
-      {
-        tier: "Platinum",
-        cost: 50000,
-        inclusions: [
-          "Solo Keynote session (30 mins)",
-          "Large 20x20 Booth in central hallway",
-          "Headline logo branding on all stage screens",
-          "12 full-access passes & VIP Speaker Lounge access",
-          "1 full list of lead scan details",
-          "Dedicated video spot in the online stream transitions"
-        ]
-      },
-      {
-        tier: "Gold",
-        cost: 30000,
-        inclusions: [
-          "Track sponsorship & opening remarks slot (10 mins)",
-          "10x10 premium booth",
-          "6 full-access tickets",
-          "Logo on official event bags"
-        ]
-      },
-      {
-        tier: "Silver",
-        cost: 15000,
-        inclusions: [
-          "10x10 standard booth space",
-          "Logo on event site & banners",
-          "3 full-access tickets"
-        ]
-      },
-      {
-        tier: "Bronze",
-        cost: 6000,
-        inclusions: [
-          "Shared booth table (startup row)",
-          "Logo on website",
-          "2 full-access tickets"
-        ]
-      }
+      { tier: "Platinum", cost: 50000, inclusions: ["Solo Keynote session (30 mins)", "Large 20x20 Booth in central hallway", "Headline logo branding on all stage screens", "12 full-access passes"] },
+      { tier: "Gold", cost: 30000, inclusions: ["Track sponsorship & opening remarks slot (10 mins)", "10x10 premium booth", "6 full-access tickets"] },
+      { tier: "Silver", cost: 15000, inclusions: ["10x10 standard booth space", "Logo on event site & banners", "3 full-access tickets"] },
+      { tier: "Bronze", cost: 6000, inclusions: ["Shared booth table (startup row)", "Logo on website", "2 full-access tickets"] }
     ]
   },
   {
     id: 4,
     name: "MedTech Innovations Summit",
     logoText: "MTI",
-    date: getDateOffset(200), // ~ January 26, 2027 (~200 days out)
+    date: getDateOffset(200), // ~ January 26, 2027
     location: "Boston, MA",
     website: "https://medtechinnovationssummit.com",
-    verticals: ["biotech-health"],
+    verticals: ["healthcare"],
     description: "Bringing together physicians, research scientists, FDA policy experts, and medical hardware developers to discuss surgical robotics, sensor networks, and cloud diagnostics.",
     opportunities: {
       keynote: {
@@ -298,206 +193,421 @@ const seedEvents = [
         link: "https://medtechinnovationssummit.com/cfp/abstracts"
       },
       paper: {
-        title: "Journal of Medical Hardware",
-        deadline: getDateOffset(100),
-        description: "Academic papers covering biological material compatibility, telemetry security, and automated drug delivery algorithms.",
-        link: "https://medtechinnovationssummit.com/cfp/journals"
+        title: "Medical Hardware & Sensors",
+        deadline: getDateOffset(110),
+        description: "Academic submissions focusing on FDA regulatory pathways, safety protocols, and embedded software systems in implants.",
+        link: "https://medtechinnovationssummit.com/cfp/papers"
       }
     },
     organizers: [
-      { name: "Dr. Alice Vance", role: "Scientific Board Chair", email: "a.vance@medtechinnovationssummit.com", linkedin: "https://linkedin.com/in/alicevance-medtech" },
-      { name: "Gregory Helms", role: "Sponsorship Manager", email: "g.helms@medtechinnovationssummit.com", linkedin: "https://linkedin.com/in/greghelms-mti" }
+      { name: "Dr. Aris Thorne", role: "Program Director", email: "a.thorne@medtechinnovationssummit.com", linkedin: "https://linkedin.com/in/aris-thorne-mti" },
+      { name: "Diana Prince", role: "Sponsorship Manager", email: "sponsorship@medtechinnovationssummit.com", linkedin: "https://linkedin.com/in/dianaprince-mti" }
     ],
     sponsorships: [
-      {
-        tier: "Platinum",
-        cost: 40000,
-        inclusions: [
-          "Welcome address during Opening Ceremony (5 mins)",
-          "Premium 20x20 Booth space in primary exhibition hall",
-          "Banner logo in main registration lobby",
-          "8 full-access tickets & 4 speaker banquet passes",
-          "Logo on the lanyard badges of all scientific reviewers"
-        ]
-      },
-      {
-        tier: "Gold",
-        cost: 22000,
-        inclusions: [
-          "10x10 premium booth",
-          "Sponsor badge for one lunch breakout session",
-          "4 full-access tickets",
-          "Ad page in official medical abstracts digest"
-        ]
-      },
-      {
-        tier: "Silver",
-        cost: 11000,
-        inclusions: [
-          "Standard 10x10 booth space",
-          "Logo on website",
-          "2 full-access tickets"
-        ]
-      },
-      {
-        tier: "Bronze",
-        cost: 4500,
-        inclusions: [
-          "Shared tabletop workspace",
-          "Logo in event handbook",
-          "1 full-access ticket"
-        ]
-      }
+      { tier: "Platinum", cost: 40000, inclusions: ["Special track presenting sponsorship (20 mins)", "20x20 central island booth in main exhibit hall", "4 workshop passes & 8 general tickets", "Featured banner on clinical app"] },
+      { tier: "Gold", cost: 22000, inclusions: ["Breakout session panel speaker slot", "10x10 standard booth space", "4 general tickets", "Logo printed on conference bag lanyards"] },
+      { tier: "Silver", cost: 11000, inclusions: ["10x10 standard booth space", "Logo listed in conference program & website", "2 general tickets"] },
+      { tier: "Bronze", cost: 4500, inclusions: ["Shared table display (startup corridor)", "Logo listed on website page", "1 general ticket"] }
     ]
   },
   {
     id: 5,
     name: "Clean Energy Expo 2027",
     logoText: "CEE",
-    date: getDateOffset(300), // ~ May 6, 2027 (~300 days out)
-    location: "Austin, TX",
+    date: getDateOffset(220), // ~ Feb 15, 2027
+    location: "Denver, CO",
     website: "https://cleanenergyexpo.org",
     verticals: ["cleantech"],
-    description: "The global stage for renewable energy grid developers, battery technologists, electric vehicle fleet managers, and policy makers mapping out carbon zero targets.",
+    description: "Focusing on grids, smart utility infrastructure, grid-edge storage, hydrogen batteries, wind farm software, and environmental tracking portals.",
     opportunities: {
       keynote: {
-        title: "Decarbonization Panel & Keynotes",
-        deadline: getDateOffset(220),
-        description: "Submit keynote topics on gigawatt-scale storage, solar module efficiencies, and hydrogen fueling systems.",
-        link: "https://cleanenergyexpo.org/keynote-cfp"
+        title: "Grid Decarbonization Keynotes",
+        deadline: getDateOffset(130),
+        description: "Submit keynote entries focusing on green energy policy, electric grid integration, or long-duration battery software.",
+        link: "https://cleanenergyexpo.org/decarbon-cfp"
       },
       abstract: {
-        title: "Grid Tech Case Studies",
-        deadline: getDateOffset(240),
-        description: "Looking for case studies regarding micro-grid deployments, municipal battery arrays, and smart building designs.",
-        link: "https://cleanenergyexpo.org/grid-cfp"
+        title: "Renewable Software Abstracts",
+        deadline: getDateOffset(150),
+        description: "Short presentations covering virtual power plants, microgrid management, or solar panel degradation analytics.",
+        link: "https://cleanenergyexpo.org/abstracts"
       },
       paper: {
-        title: "Academic Papers on Smart Materials",
-        deadline: getDateOffset(180),
-        description: "Publish research papers exploring advanced photovoltaic chemistry or carbon capture polymer efficiency.",
-        link: "https://cleanenergyexpo.org/papers-sub"
+        title: "Materials Science & Storage",
+        deadline: getDateOffset(120),
+        description: "Academic reports reviewing battery chemistry, storage lifespans, and high-efficiency wind turbine aerodynamics.",
+        link: "https://cleanenergyexpo.org/research-papers"
       }
     },
     organizers: [
-      { name: "Helen Diaz", role: "Committee Director", email: "h.diaz@cleanenergyexpo.org", linkedin: "https://linkedin.com/in/helendiaz-cee" },
-      { name: "Tyler Brooks", role: "Corporate Relations", email: "t.brooks@cleanenergyexpo.org", linkedin: "https://linkedin.com/in/tylerbrooks-energy" }
+      { name: "Alan Mercer", role: "Expo Coordinator", email: "mercer@cleanenergyexpo.org", linkedin: "https://linkedin.com/in/alanmercer-cee" },
+      { name: "Chloe Young", role: "Host Liaison", email: "chloe.y@cleanenergyexpo.org", linkedin: "https://linkedin.com/in/chloeyoung-expo" }
     ],
     sponsorships: [
-      {
-        tier: "Platinum",
-        cost: 30000,
-        inclusions: [
-          "Keynote track introduction slot",
-          "Large 20x20 Booth in the renewable pavilion",
-          "Full page ad in the digital clean energy workbook",
-          "8 full-access badges",
-          "Dedicated feature email highlighting your green technology"
-        ]
-      },
-      {
-        tier: "Gold",
-        cost: 18000,
-        inclusions: [
-          "10x10 standard booth space",
-          "Session sponsor logo placement for a grid tech panel",
-          "4 full-access badges",
-          "Logo listed on main signage"
-        ]
-      },
-      {
-        tier: "Silver",
-        cost: 8000,
-        inclusions: [
-          "Basic tabletop setup",
-          "Logo on website footer",
-          "2 full-access badges"
-        ]
-      },
-      {
-        tier: "Bronze",
-        cost: 3000,
-        inclusions: [
-          "Logo on website sponsor listing",
-          "1 full-access badge",
-          "Shared pamphlet stand"
-        ]
-      }
+      { tier: "Platinum", cost: 30000, inclusions: ["Headline logo placement at entry archway", "Premium 10x20 central booth space", "Opening session moderator seat", "6 full-access passes"] },
+      { tier: "Gold", cost: 18000, inclusions: ["10x10 standard booth space", "Logo on official badges & registration desks", "3 full-access passes"] },
+      { tier: "Silver", cost: 9000, inclusions: ["6ft table display in registration corridor", "Logo on website and in emails", "2 full-access passes"] },
+      { tier: "Bronze", cost: 3000, inclusions: ["Logo listed on website page", "1 full-access pass", "Shared table space in startup hall"] }
     ]
   },
   {
     id: 6,
-    name: "eCommerce Retail Summit",
-    logoText: "ERS",
-    date: getDateOffset(340), // ~ June 15, 2027 (~340 days out)
+    name: "Retail & Consumer Tech Summit",
+    logoText: "RCS",
+    date: getDateOffset(280), // ~ April 16, 2027
     location: "Chicago, IL",
-    website: "https://ecommerceretailsummit.com",
-    verticals: ["ecommerce", "saas"],
-    description: "Highlighting omnichannel commerce strategies, inventory logistics, headless shopping platforms, customer lifetime value optimization, and email marketing frameworks.",
+    website: "https://retailconsumersummit.com",
+    verticals: ["consumer-tech", "saas"],
+    description: "The largest midwest retail logistics and storefront technology showcase, featuring online carts, fulfillment robotics, custom checkout, and direct-to-consumer software.",
     opportunities: {
       keynote: {
-        title: "Fireside Chats: Scaling Brands",
-        deadline: getDateOffset(280),
-        description: "Submit pitches for main stage fireside sessions sharing strategies that scale stores past $50M in sales.",
-        link: "https://ecommerceretailsummit.com/firesides"
+        title: "Omnichannel Keynote Proposals",
+        deadline: getDateOffset(200),
+        description: "Looking for CEOs and retail brand founders to deliver 30-minute mainstage talks on global shopping and supply-chain logistics.",
+        link: "https://retailconsumersummit.com/cfp/keynotes"
       },
       abstract: {
-        title: "Logistics & Growth Case Studies",
-        deadline: getDateOffset(300),
-        description: "Short presentations covering third-party logistics (3PL) onboarding, conversion rate optimization (CRO) tests, and multi-channel listings.",
-        link: "https://ecommerceretailsummit.com/cases"
+        title: "Logistics Case Studies",
+        deadline: getDateOffset(220),
+        description: "Case studies detailing warehouse sorting, last-mile delivery, custom integrations, and CRM metrics.",
+        link: "https://retailconsumersummit.com/case-studies"
       },
       paper: {
-        title: "Consumer Data and Privacy Reports",
-        deadline: getDateOffset(260),
-        description: "Reports examining cookie-less advertising, user targeting models under privacy acts, and AI personalization analytics.",
-        link: "https://ecommerceretailsummit.com/research"
+        title: "Privacy & Analytics Reports",
+        deadline: getDateOffset(190),
+        description: "Reports examining cookie-less marketing, user targeting models under privacy acts, and customer churn analytics.",
+        link: "https://retailconsumersummit.com/research"
       }
     },
     organizers: [
-      { name: "Jessica Kohl", role: "Program Director", email: "j.kohl@ecommerceretailsummit.com", linkedin: "https://linkedin.com/in/jessicakohl-ers" },
-      { name: "Arden Finch", role: "Sponsor Representative", email: "sponsors@ecommerceretailsummit.com", linkedin: "https://linkedin.com/in/ardenfinch-summit" }
+      { name: "Jessica Kohl", role: "Program Director", email: "j.kohl@retailconsumersummit.com", linkedin: "https://linkedin.com/in/jessicakohl-rcs" },
+      { name: "Arden Finch", role: "Sponsor Representative", email: "sponsors@retailconsumersummit.com", linkedin: "https://linkedin.com/in/ardenfinch-summit" }
     ],
     sponsorships: [
-      {
-        tier: "Platinum",
-        cost: 25000,
-        inclusions: [
-          "Panel opening slot on the Ecommerce track",
-          "Premium 10x20 central corridor booth",
-          "Header logo branding on the event app",
-          "6 full-access passes & 10 developer passes",
-          "Company profile featured in attendee onboarding survey"
-        ]
+      { tier: "Platinum", cost: 25000, inclusions: ["Panel opening slot on the Ecommerce track", "Premium 10x20 central corridor booth", "Header logo branding on the event app", "6 full-access passes"] },
+      { tier: "Gold", cost: 15000, inclusions: ["10x10 standard booth space", "Logo on the official water bottles distributed to attendees", "4 full-access passes"] },
+      { tier: "Silver", cost: 7500, inclusions: ["6ft table display in registration corridor", "Logo on website and in emails", "2 full-access passes"] },
+      { tier: "Bronze", cost: 2500, inclusions: ["Logo listed on website page", "1 full-access pass", "Flier included in entry package"] }
+    ]
+  },
+  {
+    id: 7,
+    name: "CES 2027 (Consumer Electronics Show)",
+    logoText: "CES",
+    date: getDateOffset(180), // ~ Jan 6, 2027
+    location: "Las Vegas, NV",
+    website: "https://ces.tech",
+    verticals: ["consumer-tech"],
+    description: "The most influential tech event in the world — the proving ground for breakthrough technologies and global innovators.",
+    opportunities: {
+      keynote: {
+        title: "CES Global Keynotes",
+        deadline: getDateOffset(100),
+        description: "Looking for multinational executives and top-tier consumer brand innovators to discuss electronics evolution.",
+        link: "https://ces.tech/cfp/keynotes"
       },
-      {
-        tier: "Gold",
-        cost: 15000,
-        inclusions: [
-          "10x10 standard booth space",
-          "Logo on the official water bottles distributed to attendees",
-          "4 full-access passes",
-          "Logo featured in the print agenda"
-        ]
+      abstract: {
+        title: "Innovations Showcase Panels",
+        deadline: getDateOffset(120),
+        description: "Showcase smart home, health wearables, and smart mobility solutions on panels.",
+        link: "https://ces.tech/showcase"
       },
-      {
-        tier: "Silver",
-        cost: 7500,
-        inclusions: [
-          "6ft table display in registration corridor",
-          "Logo on website and in emails",
-          "2 full-access passes"
-        ]
-      },
-      {
-        tier: "Bronze",
-        cost: 2500,
-        inclusions: [
-          "Logo listed on website page",
-          "1 full-access pass",
-          "Flier included in entry package"
-        ]
+      paper: {
+        title: "Next-Gen Hardware Electronics",
+        deadline: getDateOffset(90),
+        description: "Proposals on screen display science, microchip architectures, and custom consumer battery safety.",
+        link: "https://ces.tech/papers"
       }
+    },
+    organizers: [
+      { name: "Gary Shapiro", role: "President & CEO", email: "gshapiro@ces.tech", linkedin: "https://linkedin.com/in/garyshapiro-ces" },
+      { name: "Sponsorship Team", role: "Exhibitor Relations", email: "exhibits@ces.tech", linkedin: "https://linkedin.com/in/ces-exhibitor-relations" }
+    ],
+    sponsorships: [
+      { tier: "Platinum", cost: 120000, inclusions: ["Dedicated pavilion space in central hall", "Logo featured on all physical lanyards", "Mainstage panel speaking slot", "20 VIP full-access passes"] },
+      { tier: "Gold", cost: 75000, inclusions: ["10x20 Premium booth in tech zone", "Branding in CES daily print newsletter", "10 full-access tickets"] },
+      { tier: "Silver", cost: 35000, inclusions: ["10x10 standard booth space", "Logo listed in mobile app directories", "5 full-access tickets"] },
+      { tier: "Bronze", cost: 15000, inclusions: ["Pull-up banner space in Venetian lobby", "Logo on official website page", "2 full-access tickets"] }
+    ]
+  },
+  {
+    id: 8,
+    name: "HIMSS 2027 Global Health Conference",
+    logoText: "HMS",
+    date: getDateOffset(248), // ~ March 15, 2027
+    location: "Orlando, FL",
+    website: "https://himssconference.org",
+    verticals: ["healthcare"],
+    description: "The leading global conference dedicated to clinical informatics, EHR integration, hospital database security, and digital telehealth innovations.",
+    opportunities: {
+      keynote: {
+        title: "Clinical Informatics Keynote",
+        deadline: getDateOffset(180),
+        description: "Submit entries for clinical workflows, medical database governance, and modern AI diagnostic implementations.",
+        link: "https://himssconference.org/keynotes"
+      },
+      abstract: {
+        title: "Digital Health Tech Abstracts",
+        deadline: getDateOffset(190),
+        description: "Talk proposals on remote patient monitoring, hospital cloud structures, and cybersecurity safeguards.",
+        link: "https://himssconference.org/abstracts"
+      },
+      paper: {
+        title: "EHR Interoperability Research",
+        deadline: getDateOffset(170),
+        description: "Scientific track analyzing HL7 standards, clinical data routing, and data privacy in multi-hospital systems.",
+        link: "https://himssconference.org/research"
+      }
+    },
+    organizers: [
+      { name: "Hal Wolf", role: "CEO & President", email: "hwolf@himss.org", linkedin: "https://linkedin.com/in/hal-wolf-himss" },
+      { name: "Clara Davis", role: "Speaker Relations Coordinator", email: "speakers@himss.org", linkedin: "https://linkedin.com/in/claradavis-himss" }
+    ],
+    sponsorships: [
+      { tier: "Platinum", cost: 65000, inclusions: ["Session host branding on top clinical track", "20x20 Booth space in primary health corridor", "12 VIP full-access passes"] },
+      { tier: "Gold", cost: 35000, inclusions: ["10x10 standard booth space", "Featured spotlight email to pre-registered attendees", "6 full-access passes"] },
+      { tier: "Silver", cost: 18000, inclusions: ["10x10 standard booth space", "Logo on conference mobile app", "3 full-access tickets"] },
+      { tier: "Bronze", cost: 8000, inclusions: ["Logo on website and digital brochure", "2 full-access tickets", "Shared table display in startup showcase"] }
+    ]
+  },
+  {
+    id: 9,
+    name: "World Congress on Mental Health 2027",
+    logoText: "WMH",
+    date: getDateOffset(274), // ~ April 10, 2027
+    location: "Chicago, IL",
+    website: "https://worldmentalhealthcongress.org",
+    verticals: ["healthcare"],
+    description: "Bringing together therapists, research psychiatrists, clinic directors, and digital therapeutic developers to discuss psychiatric software and mental health access.",
+    opportunities: {
+      keynote: {
+        title: "Global Mental Health Keynotes",
+        deadline: getDateOffset(200),
+        description: "Keynotes covering public sector access, psychiatric therapy software, and clinical therapy scaling models.",
+        link: "https://worldmentalhealthcongress.org/cfp/keynote"
+      },
+      abstract: {
+        title: "Therapeutic Apps & Tech Abstracts",
+        deadline: getDateOffset(210),
+        description: "Submit case studies showing patient engagement in mental health mobile apps or digital clinics.",
+        link: "https://worldmentalhealthcongress.org/cfp/abstracts"
+      },
+      paper: {
+        title: "Clinical Psychology Tech Journal",
+        deadline: getDateOffset(180),
+        description: "Research papers detailing security in telemedicine, clinical effectiveness of app treatments, and CBT automation.",
+        link: "https://worldmentalhealthcongress.org/cfp/papers"
+      }
+    },
+    organizers: [
+      { name: "Dr. Linda Reynolds", role: "Committee Chair", email: "l.reynolds@worldmentalhealthcongress.org", linkedin: "https://linkedin.com/in/lindareynolds-wmh" },
+      { name: "Arthur Dent", role: "Speaker Coordinator", email: "speakers@worldmentalhealthcongress.org", linkedin: "https://linkedin.com/in/arthurdent-wmh" }
+    ],
+    sponsorships: [
+      { tier: "Platinum", cost: 20000, inclusions: ["Mainstage panel seat", "10x10 booth space in high-traffic foyer", "Logo printed on attendee check-in badges", "5 full-access passes"] },
+      { tier: "Gold", cost: 12000, inclusions: ["Breakout session speaker slot (15 mins)", "Standard table display", "3 full-access tickets"] },
+      { tier: "Silver", cost: 6000, inclusions: ["Standard table display", "Logo on official event site", "2 full-access tickets"] },
+      { tier: "Bronze", cost: 2500, inclusions: ["Logo on official website footer", "1 full-access ticket"] }
+    ]
+  },
+  {
+    id: 10,
+    name: "FinovateSpring 2027",
+    logoText: "FIN",
+    date: getDateOffset(306), // ~ May 12, 2027
+    location: "San Francisco, CA",
+    website: "https://finovatespring.com",
+    verticals: ["finance"],
+    description: "The leading fintech platform showcasing 50+ live demo sessions on banking tech, financial software, security protocols, and trading tools.",
+    opportunities: {
+      keynote: {
+        title: "Live Demo Presenters",
+        deadline: getDateOffset(240),
+        description: "Pitch to run a 7-minute live demo on stage showing off working fintech software. No slides allowed.",
+        link: "https://finovatespring.com/cfp/demos"
+      },
+      abstract: {
+        title: "Fintech Leader Quick-Talks",
+        deadline: getDateOffset(250),
+        description: "Submit 10-minute talks regarding neo-banking strategies, credit algorithms, and instant transaction processing.",
+        link: "https://finovatespring.com/abstracts"
+      },
+      paper: {
+        title: "Institutional Banking Reports",
+        deadline: getDateOffset(220),
+        description: "Analytics reports reviewing cloud migrations of bank ledgers, financial APIs, and card transaction routing.",
+        link: "https://finovatespring.com/research"
+      }
+    },
+    organizers: [
+      { name: "Greg Palmer", role: "VP & Host", email: "g.palmer@finovate.com", linkedin: "https://linkedin.com/in/gregpalmer-finovate" },
+      { name: "Alex Harrison", role: "Lead Organizer", email: "alex@finovate.com", linkedin: "https://linkedin.com/in/alexharrison-finovate" }
+    ],
+    sponsorships: [
+      { tier: "Platinum", cost: 45000, inclusions: ["Dedicated 7-minute mainstage demo slot guaranteed", "Double-size exhibit booth in central demo hall", "10 full-access passes"] },
+      { tier: "Gold", cost: 28000, inclusions: ["Track speaking slot on digital banking breakout", "Standard exhibit booth", "5 full-access tickets"] },
+      { tier: "Silver", cost: 15000, inclusions: ["Standard exhibit booth", "Logo listed in conference app & website", "3 full-access tickets"] },
+      { tier: "Bronze", cost: 7000, inclusions: ["Shared display stand in demo foyer", "Logo listed on website page", "2 full-access tickets"] }
+    ]
+  },
+  {
+    id: 11,
+    name: "Defense Tech & Security Expo 2026",
+    logoText: "DTS",
+    date: getDateOffset(100), // ~ Oct 18, 2026
+    location: "Washington, D.C.",
+    website: "https://defensetechexpo.mil",
+    verticals: ["military-industrial"],
+    description: "Bringing together military leaders, aerospace engineers, cyber defense officers, and hardware manufacturers to review secure communications and autonomous defense.",
+    opportunities: {
+      keynote: {
+        title: "Strategic Avionics Keynotes",
+        deadline: getDateOffset(50),
+        description: "Submit proposals for sessions on satellite encryption, UAV flight software, and secure telemetry systems.",
+        link: "https://defensetechexpo.mil/cfp/keynote"
+      },
+      abstract: {
+        title: "Cyber Defense Abstracts",
+        deadline: getDateOffset(60),
+        description: "Submit papers on network security, zero-trust architectures for communication nodes, and edge sensor grids.",
+        link: "https://defensetechexpo.mil/cfp/abstracts"
+      },
+      paper: {
+        title: "Military Robotics and Automation",
+        deadline: getDateOffset(40),
+        description: "Academic tract presenting autonomous navigation safety, battery stability in flight grids, and materials science.",
+        link: "https://defensetechexpo.mil/cfp/papers"
+      }
+    },
+    organizers: [
+      { name: "Col. Thomas Miller", role: "General Coordinator", email: "thomas.miller@defensetechexpo.mil", linkedin: "https://linkedin.com/in/thomasmiller-dts" },
+      { name: "John R. Vance", role: "Exhibitor Liaison", email: "exhibits@defensetechexpo.mil", linkedin: "https://linkedin.com/in/johnvance-dts" }
+    ],
+    sponsorships: [
+      { tier: "Platinum", cost: 80000, inclusions: ["Keynote slot during defense software morning track", "Premium 20x20 center booth in defense hall", "10 VIP full-access passes"] },
+      { tier: "Gold", cost: 45000, inclusions: ["Standard 10x10 booth space", "Branded logo on registration security checkpoints", "5 full-access passes"] },
+      { tier: "Silver", cost: 25000, inclusions: ["Standard 10x10 booth space", "Logo on all sessions intro slides & banners", "3 full-access tickets"] },
+      { tier: "Bronze", cost: 10000, inclusions: ["Shared display panel in aerospace zone", "Logo on official website page", "1 full-access ticket"] }
+    ]
+  },
+  {
+    id: 12,
+    name: "Industrial IoT & Automation World 2026",
+    logoText: "IIW",
+    date: getDateOffset(125), // ~ Nov 12, 2026
+    location: "Chicago, IL",
+    website: "https://iotworldchicago.com",
+    verticals: ["military-industrial"],
+    description: "Focusing on smart factory automation, predictive maintenance, edge analytics, warehouse robotics, and industrial network security.",
+    opportunities: {
+      keynote: {
+        title: "Factory Automation Keynote",
+        deadline: getDateOffset(70),
+        description: "Mainstage keynotes reviewing predictive maintenance grids, robotic assembly pipelines, and smart sensors.",
+        link: "https://iotworldchicago.com/cfp/keynote"
+      },
+      abstract: {
+        title: "Edge Computing Case Studies",
+        deadline: getDateOffset(85),
+        description: "Submit case studies illustrating PLC integration, remote device monitoring, and high-frequency sensor streams.",
+        link: "https://iotworldchicago.com/cfp/abstracts"
+      },
+      paper: {
+        title: "Industrial Protocols & Safety",
+        deadline: getDateOffset(55),
+        description: "Reports reviewing Modbus security, industrial Wi-Fi grids, and automated robot safety systems.",
+        link: "https://iotworldchicago.com/cfp/papers"
+      }
+    },
+    organizers: [
+      { name: "Steve Jenkins", role: "Expo Director", email: "steve@iotworldchicago.com", linkedin: "https://linkedin.com/in/stevejenkins-iiw" },
+      { name: "Anna Novak", role: "Sponsorship Relations", email: "sponsors@iotworldchicago.com", linkedin: "https://linkedin.com/in/annanovak-iiw" }
+    ],
+    sponsorships: [
+      { tier: "Platinum", cost: 35000, inclusions: ["Moderator seat on smart factory track panel", "10x20 premium booth in automation hall", "8 full-access tickets"] },
+      { tier: "Gold", cost: 20000, inclusions: ["Standard 10x10 booth space", "Logo on badges & entrance signage", "4 full-access tickets"] },
+      { tier: "Silver", cost: 10000, inclusions: ["Standard 6ft table display in lobby", "Logo on website and in promotional emails", "2 full-access tickets"] },
+      { tier: "Bronze", cost: 4000, inclusions: ["Logo on website under bronze partners", "1 full-access ticket", "Brochure insert inside visitor bags"] }
+    ]
+  },
+  {
+    id: 13,
+    name: "Money20/20 USA 2026",
+    logoText: "M20",
+    date: getDateOffset(107), // ~ Oct 25, 2026
+    location: "Las Vegas, NV",
+    website: "https://us.money2020.com",
+    verticals: ["finance"],
+    description: "The absolute global heart of financial services and money tech — where bank systems, fintech startups, and payment infrastructure meet.",
+    opportunities: {
+      keynote: {
+        title: "Money20/20 Vision Keynote",
+        deadline: getDateOffset(50),
+        description: "Proposals for mainstage presentations on global payment infrastructure, regulatory compliance, and consumer finance trends.",
+        link: "https://us.money2020.com/cfp/keynote"
+      },
+      abstract: {
+        title: "Breakout Panels: Digital Banking",
+        deadline: getDateOffset(70),
+        description: "Submit panel proposals on modern credit algorithms, instant micro-payments, and bank security structures.",
+        link: "https://us.money2020.com/cfp/panels"
+      },
+      paper: {
+        title: "Future Payments & Ledger Systems",
+        deadline: getDateOffset(40),
+        description: "Reports examining merchant transaction fees, zero-knowledge proofs for banking records, and smart-contracts.",
+        link: "https://us.money2020.com/cfp/research"
+      }
+    },
+    organizers: [
+      { name: "Tracey Davies", role: "President", email: "tdavies@money2020.com", linkedin: "https://linkedin.com/in/traceydavies-m20" },
+      { name: "Sarah Harris", role: "Sponsorship Director", email: "sponsorship@money2020.com", linkedin: "https://linkedin.com/in/sponsorship-m20" }
+    ],
+    sponsorships: [
+      { tier: "Platinum", cost: 110000, inclusions: ["Exclusive track branding & speakership panel seat", "Large 20x20 custom pavilion display in core hall", "15 VIP full-access passes"] },
+      { tier: "Gold", cost: 65000, inclusions: ["Standard 10x20 booth in card networks corridor", "Prominent logo on main conference badge lanyard", "8 full-access passes"] },
+      { tier: "Silver", cost: 35000, inclusions: ["Standard 10x10 booth space", "Logo on conference mobile app and website footer", "4 full-access passes"] },
+      { tier: "Bronze", cost: 15000, inclusions: ["Logo in official handbook & entrance banner", "2 full-access passes"] }
+    ]
+  },
+  {
+    id: 14,
+    name: "Shoptalk 2027",
+    logoText: "STK",
+    date: getDateOffset(254), // ~ March 21, 2027
+    location: "Las Vegas, NV",
+    website: "https://shoptalk.com",
+    verticals: ["consumer-tech"],
+    description: "The global hub for retail technology and direct-to-consumer software, outlining store analytics, smart pricing, and delivery logistics.",
+    opportunities: {
+      keynote: {
+        title: "Retail Tech Keynotes",
+        deadline: getDateOffset(180),
+        description: "Proposals for 30-minute mainstage presentations on consumer shopping trends, smart supply chains, and retail software ecosystems.",
+        link: "https://shoptalk.com/cfp/keynote"
+      },
+      abstract: {
+        title: "DTC Branding Panels",
+        deadline: getDateOffset(200),
+        description: "Submit panel proposals detailing mobile shopping conversion, customer return loops, and logistics systems.",
+        link: "https://shoptalk.com/cfp/abstracts"
+      },
+      paper: {
+        title: "Logistics Analytics Reports",
+        deadline: getDateOffset(170),
+        description: "Academic reports reviewing sorting robot algorithms, local delivery dispatch grids, and inventory data models.",
+        link: "https://shoptalk.com/cfp/research"
+      }
+    },
+    organizers: [
+      { name: "Jonathan Wilcox", role: "Event Director", email: "j.wilcox@shoptalk.com", linkedin: "https://linkedin.com/in/jonathanwilcox-shoptalk" },
+      { name: "Rebecca Stone", role: "Speaker Coordinator", email: "speakers@shoptalk.com", linkedin: "https://linkedin.com/in/rebeccastone-shoptalk" }
+    ],
+    sponsorships: [
+      { tier: "Platinum", cost: 75000, inclusions: ["Mainstage panel seat & track sponsorship", "Premium 20x20 island display in tech hall", "10 VIP full-access passes"] },
+      { tier: "Gold", cost: 45000, inclusions: ["10x10 premium display space", "Branded logo on registration checks", "5 full-access tickets"] },
+      { tier: "Silver", cost: 22000, inclusions: ["Standard table stand in foyer", "Logo in mobile directory", "3 full-access tickets"] },
+      { tier: "Bronze", cost: 9000, inclusions: ["Logo on website footer page", "1 full-access ticket", "Startup shared stand zone"] }
     ]
   }
 ];
@@ -539,7 +649,7 @@ const mockAIBenefits = {
       ]
     }
   },
-  "fintech": {
+  "finance": {
     "ffe": {
       pitch: "FinTech Frontiers Expo is the premier sandbox to demonstrate payment security, ledger systems, or billing APIs. The audience consists of enterprise bank executives, payment networks, and compliance officers. Presenting on panels puts you in the center of regulatory and technological discussions.",
       metrics: [
@@ -547,15 +657,31 @@ const mockAIBenefits = {
         { label: "Lead Quality", value: "Enterprise (B2B Buy-in)" },
         { label: "Key Benefit", value: "Regulatory Compliance Credibility" }
       ]
+    },
+    "us.money2020": {
+      pitch: "Money20/20 USA is the premier meeting ground for financial networks and banking ecosystems. Demonstrating solutions here puts you in front of enterprise decision-makers who manage billions in capital. An excellent match for fast-tracking payment integrations or closing enterprise institutional banking deals.",
+      metrics: [
+        { label: "Bank Executives", value: "1,500+ Attendees" },
+        { label: "Deal Sizes", value: "Enterprise-grade" },
+        { label: "Key Benefit", value: "Global Payment Network Onboarding" }
+      ]
     }
   },
-  "biotech-health": {
+  "healthcare": {
     "mti": {
       pitch: "MedTech Innovations Summit is essential for hardware and digital diagnostics companies. Speaking here lets you present clinical trial results or sensor data to institutional buyers, medical providers, and VC partners. It helps build clinical trust, which is the primary driver for hospital sales.",
       metrics: [
         { label: "Clinical Contacts", value: "600+ Doctors/Scientists" },
         { label: "Investor Capital", value: "$4.5B collectively managed" },
         { label: "Key Benefit", value: "Scientific Peer Approval & VC Matching" }
+      ]
+    },
+    "himssconference": {
+      pitch: "HIMSS is the gold standard for clinical informatics. Speaking on EHR interoperability or database security puts you in front of hospital CIOs and healthcare network buyers. A massive opportunity to drive enterprise health tech sales and secure clinical compliance buy-in.",
+      metrics: [
+        { label: "Hospital CIOs", value: "500+ CIOs" },
+        { label: "Market Size", value: "Global Health Systems" },
+        { label: "Key Benefit", value: "Enterprise EHR Integrations" }
       ]
     }
   },
@@ -569,13 +695,13 @@ const mockAIBenefits = {
       ]
     }
   },
-  "ecommerce": {
-    "ers": {
-      pitch: "The eCommerce Retail Summit places your storefront software or marketing platform right before active sellers and brand managers. If your service improves conversion rates, cart size, or logistics speeds, this is the exact crowd searching for your solutions. Networking dinners connect you with high-volume accounts.",
+  "consumer-tech": {
+    "ces": {
+      pitch: "CES is the largest electronics and tech showcase globally. Presenting your consumer products or smart technologies here gives you massive international media coverage and direct meetings with global distributors, retailers, and strategic partners.",
       metrics: [
-        { label: "Avg store GMV", value: "$12M /yr" },
-        { label: "Brand Decision Makers", value: "1,200+ Directors" },
-        { label: "Key Benefit", value: "High-volume merchant onboarding" }
+        { label: "Media Reach", value: "150,000+ Attendees" },
+        { label: "Retail Buyers", value: "12,000+ Outlets" },
+        { label: "Key Benefit", value: "Global Brand Recognition & Distribution" }
       ]
     }
   }
@@ -587,4 +713,3 @@ window.EventSharkData = {
   seedEvents,
   mockAIBenefits
 };
-

@@ -18,7 +18,8 @@ const state = {
     dateHorizon: 12, // months
     keynotes: true,
     abstracts: true,
-    papers: true
+    papers: true,
+    vertical: 'all'
   },
   sponsorship: {
     budgetValue: 15000,
@@ -149,9 +150,17 @@ function setupFilters() {
   const filterAbstracts = document.getElementById('filter-abstracts');
   const filterPapers = document.getElementById('filter-papers');
   
+  const filterVertical = document.getElementById('filter-vertical');
+  
   // Search text input
   searchInput.addEventListener('input', (e) => {
     state.filters.search = e.target.value.toLowerCase();
+    renderEventsGrid();
+  });
+  
+  // Industry Theme selector input
+  filterVertical.addEventListener('change', (e) => {
+    state.filters.vertical = e.target.value;
     renderEventsGrid();
   });
   
@@ -221,7 +230,11 @@ function renderEventsGrid() {
       hasMatchingOpp = false;
     }
     
-    if (searchMatch && dateMatch && hasMatchingOpp) {
+    // 4. Vertical filter
+    const verticalMatch = state.filters.vertical === 'all' || 
+      event.verticals.includes(state.filters.vertical);
+    
+    if (searchMatch && dateMatch && hasMatchingOpp && verticalMatch) {
       matchesCount++;
       
       // Render card
