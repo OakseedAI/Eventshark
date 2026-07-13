@@ -44,34 +44,68 @@ def get_inlined_html():
         html = f.read()
         
     # Read styles.css
+    css = ""
     css_path = find_file("styles.css")
     if css_path:
         with open(css_path, "r", encoding="utf-8") as f:
             css = f.read()
-        html = replace_tag(html, r'<\s*link[^>]*href=["\']styles\.css["\'][^>]*>', f'<style>{css}</style>')
-        
+            
     # Read data.js
+    data_js = ""
     data_path = find_file("data.js")
     if data_path:
         with open(data_path, "r", encoding="utf-8") as f:
             data_js = f.read()
-        html = replace_tag(html, r'<\s*script[^>]*src=["\']data\.js["\'][^>]*><\s*/\s*script\s*>', f'<script>{data_js}</script>')
-        
+            
     # Read scraper.js
+    scraper_js = ""
     scraper_path = find_file("scraper.js")
     if scraper_path:
         with open(scraper_path, "r", encoding="utf-8") as f:
             scraper_js = f.read()
-        html = replace_tag(html, r'<\s*script[^>]*src=["\']scraper\.js["\'][^>]*><\s*/\s*script\s*>', f'<script>{scraper_js}</script>')
-        
+            
     # Read app.js
+    app_js = ""
     app_path = find_file("app.js")
     if app_path:
         with open(app_path, "r", encoding="utf-8") as f:
             app_js = f.read()
-        html = replace_tag(html, r'<\s*script[^>]*src=["\']app\.js["\'][^>]*><\s*/\s*script\s*>', f'<script>{app_js}</script>')
+            
+    # ---------------- DYNAMIC ESM TO NON-ESM CONVERSION ----------------
+    # 1. Clean data.js (strip exports and expose globally)
+    if "window.EventSharkData" not in data_js:
+        data_js = data_js.replace("export const", "const")
+        data_js += "\nwindow.EventSharkData = { businessVerticals, seedEvents, mockAIBenefits };\n"
         
-    # Inline the Shark Logo as Base64 image
+    # 2. Clean scraper.js (strip exports and expose globally)
+    if "window.EventSharkScraper" not in scraper_js:
+        scraper_js = scraper_js.replace("export async function", "async function")
+        scraper_js += "\nwindow.EventSharkScraper = { scrapeEvent };\n"
+        
+    # 3. Clean app.js (strip imports and bind to window destructured variables)
+    if "window.EventSharkData" not in app_js:
+        # Strip ESM imports
+        app_js = re.sub(r'import\s+{[^}]+}\s+from\s+[\'"].+[\'"];?', '', app_js)
+        # Prepend window global declarations
+        app_js = "const { seedEvents, businessVerticals, mockAIBenefits } = window.EventSharkData;\nconst { scrapeEvent } = window.EventSharkScraper;\n" + app_js
+
+    # ---------------- HTML COMPILATION & INJECTION ----------------
+    # 1. Strip out any existing stylesheet links
+    html = re.sub(r'<\s*link[^>]*href=["\']styles\.css["\'][^>]*>', '', html)
+    
+    # 2. Strip out any existing script tags to prevent duplicates or CORS fetches
+    html = re.sub(r'<\s*script[^>]*src=["\'](data|scraper|app)\.js["\'][^>]*><\s*/\s*script\s*>', '', html)
+    html = re.sub(r'<\s*script[^>]*type=["\']module["\'][^>]*src=["\']app\.js["\'][^>]*><\s*/\s*script\s*>', '', html)
+    
+    # 3. Inject styles into <head>
+    if css:
+        html = html.replace('</head>', f'<style>{css}</style>\n</head>')
+        
+    # 4. Inject JavaScript payload (ordered: data -> scraper -> app) at the end of <body>
+    js_payload = f"<script>{data_js}</script>\n<script>{scraper_js}</script>\n<script>{app_js}</script>"
+    html = html.replace('</body>', f'{js_payload}\n</body>')
+    
+    # 5. Inline the Shark Logo as Base64 image
     logo_path = find_file("shark_logo.jpg")
     if logo_path:
         with open(logo_path, "rb") as f:
